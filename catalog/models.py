@@ -14,3 +14,23 @@ class Place(models.Model):
     class Meta:
         verbose_name = "Место"
         verbose_name_plural = "Места"
+
+
+class Image(models.Model):
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, related_name="images", verbose_name="Место"
+    )
+    image = models.ImageField(upload_to="places/", verbose_name="Изображение")
+    position = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Позиция",
+        help_text="Чем меньше число, тем выше в списке",
+    )
+
+    class Meta:
+        verbose_name = "Изображение"
+        verbose_name_plural = "Изображения"
+        ordering = ["position"]
+
+    def __str__(self):
+        return f"Изображение {self.position} для {self.place.title}"
