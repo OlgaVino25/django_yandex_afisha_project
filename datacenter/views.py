@@ -2,4 +2,4 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, "page.html")
+    return render(request, "map.html")
