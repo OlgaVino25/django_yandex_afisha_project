@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from datacenter import views
+from catalog import views
 
 
 urlpatterns = [
