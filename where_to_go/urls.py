@@ -25,8 +25,7 @@ from catalog import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
-    path("place/<int:place_id>/", views.place_detail, name="place_detail"),
-    path("places/<int:place_id>/", views.place_title, name="place_title"),
+    path("places/<int:place_id>/", views.place_json, name="place_json"),
 ]
 
 if settings.DEBUG:

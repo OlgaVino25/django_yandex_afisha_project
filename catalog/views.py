@@ -19,7 +19,7 @@ def home(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f"/place/{place.id}/",
+                "detailsUrl": f"/places/{place.id}/",
             },
         }
         features.append(feature)
@@ -30,21 +30,7 @@ def home(request):
     return render(request, "map.html", {"geojson_data": geojson_str})
 
 
-def place_detail(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
-
-    place_data = {
-        "title": place.title,
-        "imgs": [img.image.url for img in place.images.all()],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
-        "coordinates": {"lng": float(place.lng), "lat": float(place.lat)},
-    }
-
-    return JsonResponse(place_data)
-
-
-def place_title(request, place_id):
+def place_json(request, place_id):
     place = get_object_or_404(Place, id=place_id)
 
     place_data = {
