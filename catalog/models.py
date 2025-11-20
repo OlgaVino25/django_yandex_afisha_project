@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 
 
 class Place(models.Model):
@@ -34,3 +35,12 @@ class Image(models.Model):
 
     def __str__(self):
         return f"Изображение {self.position} для {self.place.title}"
+
+    def image_preview(self):
+        if self.image:
+            return format_html(
+                '<img src="{}" style="max-height: 200px;"/>', self.image.url
+            )
+        return "Нет изображения"
+
+    image_preview.short_description = "Превью"
