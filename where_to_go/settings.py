@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "adminsortable2",
+    "tinymce",
     "django.contrib.staticfiles",
     "catalog.apps.CatalogConfig",
 ]

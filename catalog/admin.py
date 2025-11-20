@@ -1,6 +1,17 @@
 from django.contrib import admin
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
+from tinymce.widgets import TinyMCE
+from django import forms
 from .models import Place, Image
+
+
+class PlaceAdminForm(forms.ModelForm):
+    description_short = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 10}))
+    description_long = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 30}))
+
+    class Meta:
+        model = Place
+        fields = "__all__"
 
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -21,6 +32,7 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     search_fields = ["title"]
     list_display_links = ["title"]
     inlines = [ImageInline]
+    form = PlaceAdminForm
 
 
 @admin.register(Image)
