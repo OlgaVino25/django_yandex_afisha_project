@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "adminsortable2",
     "django.contrib.staticfiles",
     "catalog.apps.CatalogConfig",
 ]
