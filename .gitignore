@@ -154,3 +154,4 @@ Desktop.ini
 *.sublime-*
 *.user
 *.userosscache
+*.json
