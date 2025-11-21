@@ -67,6 +67,30 @@ python manage.py createsuperuser
 python manage.py load_all_places
 ```
 
+Пример структуры данных:
+
+```json
+{
+    "title": "Название места",
+    "imgs": [
+        "https://example.com/photo1.jpg",
+        "https://example.com/photo2.jpg"
+    ],
+    "description_short": "Краткое описание",
+    "description_long": "<p>Подробное описание с HTML</p>",
+    "coordinates": {
+        "lng": "37.617634",
+        "lat": "55.755826"
+    }
+}
+```
+
+Сохраните файл в static/places/ваше-место.json и выполните:
+
+```bash
+python manage.py load_place static/places/ваше-место.json
+```
+
 5. Запуск сервера
 
 ```bash
