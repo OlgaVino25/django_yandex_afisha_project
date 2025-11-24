@@ -4,7 +4,7 @@ import json
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from catalog.models import Place, Image
+from places.models import Place, Image
 
 
 class Command(BaseCommand):
