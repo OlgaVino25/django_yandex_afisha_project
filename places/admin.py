@@ -1,8 +1,9 @@
+from django import forms
 from django.contrib import admin
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
 from tinymce.widgets import TinyMCE
-from django import forms
-from .models import Place, Image
+
+from .models import Image, Place
 
 
 class PlaceAdminForm(forms.ModelForm):

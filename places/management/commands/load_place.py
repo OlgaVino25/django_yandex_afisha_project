@@ -1,10 +1,12 @@
-import os
-import requests
 import json
+import os
+
+import requests
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
-from django.conf import settings
-from places.models import Place, Image
+
+from places.models import Image, Place
 
 
 class Command(BaseCommand):
