@@ -19,7 +19,7 @@
 
 ### Backend
 
-- **Python 3.x** + **Django 5.2**
+- **Python 3.13.4** + **Django 5.2**
 - **База данных:** SQLite3
 - **Дополнительно:**
   - `django-admin-sortable2` - сортировка перетаскиванием
@@ -54,6 +54,16 @@ STATIC_ROOT=staticfiles
 MEDIA_ROOT=media
 ```
 
+`SECRET_KEY` - Секретный ключ Django - используется для криптографической подписи. Должен быть уникальным и непредсказуемым значением. В продакшене никогда не используйте дефолтные значения. [Документация](https://docs.djangoproject.com/en/5.2/ref/settings/#secret-key)
+
+`DEBUG` - Режим отладки - булево значение (True/False). Включает детальные страницы ошибок с информацией о настройках и среде выполнения. Никогда не включайте в продакшене! [Документация](https://docs.djangoproject.com/en/5.2/ref/settings/#debug)
+
+`ALLOWED_HOSTS` - Разрешенные хосты - список доменов/хостов, которые может обслуживать Django. Защита от HTTP Host header атак. При DEBUG=True проверка отключается. [Документация](https://docs.djangoproject.com/en/5.2/ref/settings/#allowed-hosts)
+
+`STATIC_ROOT` - Путь для статических файлов - абсолютный путь к каталогу, где collectstatic будет собирать статические файлы для продакшена. [Документация](https://docs.djangoproject.com/en/5.2/ref/settings/#static-root)
+
+`MEDIA_ROOT` - Путь для медиафайлов - абсолютный путь к файловой системе для хранения загруженных пользователем файлов (изображения мест). [Документация](https://docs.djangoproject.com/en/5.2/ref/settings/#media-root)
+
 4. Настройка базы данных
 
 ```bash
@@ -64,7 +74,19 @@ python manage.py migrate
 python manage.py createsuperuser
 
 # Загрузка тестовых данных
+# Для загрузки тестовых данных выполните:
+# Загрузка всех тестовых мест (из встроенных примеров)
 python manage.py load_all_places
+
+# Или для загрузки конкретного места по URL:
+# Загрузка данных с удаленного JSON-файла
+python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/example-place.json
+```
+
+Пример работающего URL:
+
+```text
+https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/Антикафе%20Bizone.json
 ```
 
 Пример структуры данных:
@@ -83,12 +105,6 @@ python manage.py load_all_places
         "lat": "55.755826"
     }
 }
-```
-
-Сохраните файл в static/places/ваше-место.json и выполните:
-
-```bash
-python manage.py load_place static/places/ваше-место.json
 ```
 
 5. Запуск сервера
