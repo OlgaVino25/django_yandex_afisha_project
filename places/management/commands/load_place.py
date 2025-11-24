@@ -16,7 +16,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         source = options["source"]
 
-        # Загрузка JSON
         if source.startswith("http"):
             response = requests.get(source)
             response.raise_for_status()
@@ -25,7 +24,6 @@ class Command(BaseCommand):
             with open(source, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-        # Извлекаем данные из JSON
         title = data["title"]
         description_short = data["description_short"]
         description_long = data["description_long"]
@@ -33,7 +31,6 @@ class Command(BaseCommand):
         lat = float(data["coordinates"]["lat"])
         imgs = data["imgs"]
 
-        # Создаем или обновляем место в базе данных
         place, created = Place.objects.get_or_create(
             title=title,
             defaults={
@@ -54,10 +51,8 @@ class Command(BaseCommand):
         else:
             self.stdout.write(f"Created new place: {title}")
 
-        # Удаляем старые изображения
         place.images.all().delete()
 
-        # Создаем папку для изображений, если её нет
         places_dir = os.path.join(settings.MEDIA_ROOT, "places")
         os.makedirs(places_dir, exist_ok=True)
 
