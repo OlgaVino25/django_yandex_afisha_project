@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from django.http import JsonResponse
 from places.models import Place
-import json
 
 
 def home(request):
@@ -25,9 +23,8 @@ def home(request):
         features.append(feature)
 
     geojson_data = {"type": "FeatureCollection", "features": features}
-    geojson_str = json.dumps(geojson_data, ensure_ascii=False)
 
-    return render(request, "map.html", {"geojson_data": geojson_str})
+    return render(request, "map.html", {"geojson_data": geojson_data})
 
 
 def place_json(request, place_id):
