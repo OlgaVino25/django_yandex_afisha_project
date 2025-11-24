@@ -7,8 +7,8 @@ from .models import Image, Place
 
 
 class PlaceAdminForm(forms.ModelForm):
-    description_short = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 10}))
-    description_long = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 30}))
+    short_description = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 10}))
+    long_description = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 30}))
 
     class Meta:
         model = Place

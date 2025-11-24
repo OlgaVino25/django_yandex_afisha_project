@@ -27,8 +27,8 @@ class Command(BaseCommand):
                 data = json.load(f)
 
         title = data["title"]
-        description_short = data["description_short"]
-        description_long = data["description_long"]
+        short_description = data["short_description"]
+        long_description = data["long_description"]
         lng = float(data["coordinates"]["lng"])
         lat = float(data["coordinates"]["lat"])
         imgs = data["imgs"]
@@ -36,16 +36,16 @@ class Command(BaseCommand):
         place, created = Place.objects.get_or_create(
             title=title,
             defaults={
-                "description_short": description_short,
-                "description_long": description_long,
+                "short_description": short_description,
+                "long_description": long_description,
                 "lng": lng,
                 "lat": lat,
             },
         )
 
         if not created:
-            place.description_short = description_short
-            place.description_long = description_long
+            place.short_description = short_description
+            place.long_description = long_description
             place.lng = lng
             place.lat = lat
             place.save()
