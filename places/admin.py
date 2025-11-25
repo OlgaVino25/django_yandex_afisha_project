@@ -43,3 +43,5 @@ class ImageAdmin(admin.ModelAdmin):
     search_fields = ["place__title"]
     readonly_fields = ["image_preview"]
     fields = ["place", "image", "image_preview", "position"]
+
+    autocomplete_fields = ["place"]
