@@ -42,7 +42,7 @@ class Image(models.Model):
     def image_preview(self):
         if self.image:
             return format_html(
-                '<img src="{}" style="max-height: 200px; max-width: 300px;"/>', self.image.url
+                '<img src="{}" style="max-height: 200px; max-width: 200px;"/>', self.image.url
             )
         return "Нет изображения"
 
