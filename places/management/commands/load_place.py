@@ -27,8 +27,8 @@ class Command(BaseCommand):
                 data = json.load(f)
 
         title = data["title"]
-        short_description = data["short_description"]
-        long_description = data["long_description"]
+        short_description = data["description_short"]
+        long_description = data["description_long"]
         lng = float(data["coordinates"]["lng"])
         lat = float(data["coordinates"]["lat"])
         imgs = data["imgs"]
