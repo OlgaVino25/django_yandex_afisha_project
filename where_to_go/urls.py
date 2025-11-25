@@ -26,7 +26,7 @@ from places import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
-    path("places/<int:place_id>/", views.place_json, name="place_json"),
+    path("places/<int:place_id>/", views.place_json, name="place-detail"),
     path("tinymce/", include("tinymce.urls")),
 ]
 

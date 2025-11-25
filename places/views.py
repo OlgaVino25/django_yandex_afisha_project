@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 
 from places.models import Place
 
@@ -12,13 +12,15 @@ def home(request):
         lng = float(place.lng)
         lat = float(place.lat)
 
+        details_url = reverse("place-detail", kwargs={"place_id": place.id})
+
         feature = {
             "type": "Feature",
             "geometry": {"type": "Point", "coordinates": [lng, lat]},
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f"/places/{place.id}/",
+                "detailsUrl": details_url,
             },
         }
         features.append(feature)
