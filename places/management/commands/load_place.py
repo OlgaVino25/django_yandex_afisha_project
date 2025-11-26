@@ -5,6 +5,7 @@ import requests
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
+from django.core.exceptions import MultipleObjectsReturned
 
 from places.models import Image, Place
 
@@ -33,15 +34,24 @@ class Command(BaseCommand):
         lat = float(payload["coordinates"]["lat"])
         imgs = payload["imgs"]
 
-        place, created = Place.objects.get_or_create(
-            title=title,
-            defaults={
-                "short_description": short_description,
-                "long_description": long_description,
-                "lng": lng,
-                "lat": lat,
-            },
-        )
+        try:
+            place, created = Place.objects.get_or_create(
+                title=title,
+                defaults={
+                    "short_description": short_description,
+                    "long_description": long_description,
+                    "lng": lng,
+                    "lat": lat,
+                },
+            )
+        except MultipleObjectsReturned:
+            self.stderr.write(
+                    self.style.ERROR(
+                        f"Found multiple places with title '{title}'. "
+                        "Please resolve duplicates manually."
+                    )
+                )
+            return
 
         if not created:
             place.short_description = short_description
