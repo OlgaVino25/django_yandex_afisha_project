@@ -31,7 +31,7 @@ def home(request):
 
 
 def place_json(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
+    place = get_object_or_404(Place.objects.prefetch_related("images"), id=place_id)
 
     serialized_place = {
         "title": place.title,
