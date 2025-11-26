@@ -25,15 +25,15 @@ def home(request):
         }
         features.append(feature)
 
-    geojson_data = {"type": "FeatureCollection", "features": features}
+    geojson = {"type": "FeatureCollection", "features": features}
 
-    return render(request, "map.html", {"geojson_data": geojson_data})
+    return render(request, "map.html", {"geojson": geojson})
 
 
 def place_json(request, place_id):
     place = get_object_or_404(Place, id=place_id)
 
-    place_data = {
+    serialized_place = {
         "title": place.title,
         "imgs": [img.image.url for img in place.images.all()],
         "short_description": place.short_description,
@@ -42,5 +42,5 @@ def place_json(request, place_id):
     }
 
     return JsonResponse(
-        place_data, json_dumps_params={"ensure_ascii": False, "indent": 2}
+        serialized_place, json_dumps_params={"ensure_ascii": False, "indent": 2}
     )

@@ -55,7 +55,7 @@
       var staticHandPointerIcon = "{% static 'hand-pointer-regular.svg' %}";
     </script>
 
-    {{ geojson_data|json_script:"places-geojson" }}
+    {{ geojson|json_script:"places-geojson" }}
 
     <script id="app-template" type="text/template">
       {% verbatim %}
