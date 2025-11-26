@@ -21,17 +21,17 @@ class Command(BaseCommand):
         if source.startswith("http"):
             response = requests.get(source)
             response.raise_for_status()
-            data = response.json()
+            payload = response.json()
         else:
             with open(source, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                payload = json.load(f)
 
-        title = data["title"]
-        short_description = data["description_short"]
-        long_description = data["description_long"]
-        lng = float(data["coordinates"]["lng"])
-        lat = float(data["coordinates"]["lat"])
-        imgs = data["imgs"]
+        title = payload["title"]
+        short_description = payload["description_short"]
+        long_description = payload["description_long"]
+        lng = float(payload["coordinates"]["lng"])
+        lat = float(payload["coordinates"]["lat"])
+        imgs = payload["imgs"]
 
         place, created = Place.objects.get_or_create(
             title=title,
